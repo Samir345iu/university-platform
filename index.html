@@ -1,1 +1,652 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الناقد الرقمي</title>
 
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Tahoma, Arial, sans-serif;
+  background: #080c12;
+  color: #eee;
+  line-height: 1.8;
+}
+
+:root {
+  --gold: #c9953b;
+  --gold-light: #e5b85c;
+  --dark: #080c12;
+  --card: #111720;
+  --border: #252d38;
+  --muted: #a5abb5;
+}
+
+/* الشريط العلوي */
+header {
+  height: 78px;
+  background: #090d14;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  width: 52px;
+  height: 52px;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-light);
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.logo h1 {
+  color: var(--gold-light);
+  font-size: 24px;
+}
+
+nav {
+  display: flex;
+  gap: 28px;
+}
+
+nav a {
+  color: #c9cbd0;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+nav a:hover {
+  color: var(--gold-light);
+}
+
+.auth {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--gold-light);
+  padding: 9px 18px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.btn.gold {
+  background: var(--gold);
+  color: #111;
+}
+
+/* القائمة الجانبية */
+.sidebar {
+  position: fixed;
+  right: 0;
+  top: 78px;
+  width: 90px;
+  bottom: 0;
+  background: #0b1017;
+  border-left: 1px solid var(--border);
+  padding-top: 20px;
+  z-index: 5;
+}
+
+.side-item {
+  text-align: center;
+  color: #aaa;
+  padding: 14px 5px;
+  font-size: 12px;
+}
+
+.side-icon {
+  display: block;
+  font-size: 24px;
+  color: var(--gold);
+  margin-bottom: 3px;
+}
+
+.side-item:hover {
+  background: #151b24;
+  color: var(--gold-light);
+}
+
+/* المحتوى */
+main {
+  margin-right: 90px;
+}
+
+/* Hero */
+.hero {
+  min-height: 390px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 55px 8%;
+  background:
+    radial-gradient(circle at 80% 50%, #30200d 0, transparent 35%),
+    linear-gradient(120deg, #101722, #080c12);
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-text {
+  max-width: 620px;
+}
+
+.hero h2 {
+  font-size: 48px;
+  color: var(--gold-light);
+  margin-bottom: 12px;
+}
+
+.hero h3 {
+  font-size: 22px;
+  margin-bottom: 18px;
+}
+
+.hero p {
+  color: #b7bbc3;
+  font-size: 17px;
+  margin-bottom: 25px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.book-logo {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 3px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--gold-light);
+  font-size: 80px;
+  box-shadow: 0 0 45px #9a682933;
+}
+
+/* البحث */
+.search-area {
+  padding: 25px 8%;
+}
+
+.search {
+  width: 100%;
+  padding: 17px 22px;
+  background: #0d131b;
+  border: 1px solid #343d48;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  outline: none;
+}
+
+.search:focus {
+  border-color: var(--gold);
+}
+
+/* الخدمات */
+.services {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 0 8% 35px;
+}
+
+.service {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+.service-icon {
+  font-size: 30px;
+  color: var(--gold);
+}
+
+.service h3 {
+  margin-top: 7px;
+  color: #eee;
+}
+
+.service p {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* الأقسام */
+.section {
+  padding: 0 8% 40px;
+}
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.section-title h2 {
+  color: var(--gold-light);
+  font-size: 25px;
+}
+
+.section-title a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+/* المقالات */
+.articles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.card-image {
+  height: 145px;
+  background:
+    linear-gradient(135deg, #21170c, #111923);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 55px;
+  color: var(--gold);
+}
+
+.card-body {
+  padding: 18px;
+}
+
+.card-body h3 {
+  color: #eee;
+  margin-bottom: 7px;
+}
+
+.card-body p {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.tag {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 3px 10px;
+  border: 1px solid #66502c;
+  border-radius: 20px;
+  color: var(--gold-light);
+  font-size: 11px;
+}
+
+/* النقاد */
+.critics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.critic {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 18px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.avatar {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #272d36;
+  border: 2px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-light);
+  font-size: 23px;
+}
+
+.critic p {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* الاقتباس */
+.quote {
+  background: linear-gradient(135deg, #151b24, #0c1118);
+  border: 1px solid #3b3020;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.quote-mark {
+  font-size: 40px;
+  color: var(--gold);
+}
+
+.quote p {
+  font-size: 20px;
+  color: #ddd;
+}
+
+.quote small {
+  color: var(--gold);
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid var(--border);
+  text-align: center;
+  padding: 25px;
+  color: var(--muted);
+  margin-top: 20px;
+}
+
+/* الهاتف */
+@media (max-width: 850px) {
+  header {
+    padding: 0 15px;
+  }
+
+  nav {
+    display: none;
+  }
+
+  .auth {
+    display: none;
+  }
+
+  .logo h1 {
+    font-size: 19px;
+  }
+
+  .sidebar {
+    width: 65px;
+  }
+
+  main {
+    margin-right: 65px;
+  }
+
+  .hero {
+    padding: 35px 20px;
+    text-align: center;
+    flex-direction: column-reverse;
+    gap: 25px;
+  }
+
+  .hero h2 {
+    font-size: 34px;
+  }
+
+  .hero p {
+    font-size: 14px;
+  }
+
+  .book-logo {
+    width: 150px;
+    height: 150px;
+    font-size: 50px;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .services {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 20px 30px;
+  }
+
+  .section,
+  .search-area {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .articles {
+    grid-template-columns: 1fr;
+  }
+
+  .critics {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">Z</div>
+    <h1>الناقد الرقمي</h1>
+  </div>
+
+  <nav>
+    <a href="#">الرئيسية</a>
+    <a href="#">الأقسام</a>
+    <a href="#">المقالات</a>
+    <a href="#">المكتبة</a>
+    <a href="#">النقد</a>
+    <a href="#">الفعاليات</a>
+    <a href="#">من نحن</a>
+  </nav>
+
+  <div class="auth">
+    <button class="btn">تسجيل الدخول</button>
+    <button class="btn gold">إنشاء حساب</button>
+  </div>
+</header>
+
+<aside class="sidebar">
+  <div class="side-item"><span class="side-icon">⌂</span>الرئيسية</div>
+  <div class="side-item"><span class="side-icon">▤</span>المقالات</div>
+  <div class="side-item"><span class="side-icon">▣</span>المكتبة</div>
+  <div class="side-item"><span class="side-icon">◈</span>النقد</div>
+  <div class="side-item"><span class="side-icon">▦</span>الفعاليات</div>
+  <div class="side-item"><span class="side-icon">♡</span>المفضلة</div>
+  <div class="side-item"><span class="side-icon">✉</span>الرسائل</div>
+  <div class="side-item"><span class="side-icon">⚙</span>الإعدادات</div>
+</aside>
+
+<main>
+
+<section class="hero">
+  <div class="hero-text">
+    <h2>الناقد الرقمي</h2>
+    <h3>منصة تجمع بين الفكر، النقد، والمعرفة</h3>
+    <p>
+      مساحة رقمية تفاعلية تهدف إلى تعزيز الثقافة النقدية
+      ودعم الباحثين والمهتمين بالأدب والفكر الإنساني.
+    </p>
+
+    <div class="hero-buttons">
+      <button class="btn gold">استكشف المحتوى ←</button>
+      <button class="btn">انضم إلينا ♙</button>
+    </div>
+  </div>
+
+  <div class="book-logo">
+    Z<br>
+    <small>📖</small>
+  </div>
+</section>
+
+<div class="search-area">
+  <input class="search" type="search"
+  placeholder="ابحث في المقالات، الكتب، النقد...">
+</div>
+
+<section class="services">
+
+  <div class="service">
+    <div class="service-icon">✎</div>
+    <h3>مقالات نقدية</h3>
+    <p>قراءات وتحليلات معرفية متعمقة</p>
+  </div>
+
+  <div class="service">
+    <div class="service-icon">▣</div>
+    <h3>مكتبة رقمية</h3>
+    <p>كتب ودراسات متنوعة</p>
+  </div>
+
+  <div class="service">
+    <div class="service-icon">♙</div>
+    <h3>نقاد ومفكرون</h3>
+    <p>تعرف على أبرز النقاد</p>
+  </div>
+
+  <div class="service">
+    <div class="service-icon">▦</div>
+    <h3>فعاليات وندوات</h3>
+    <p>شارك في النقاشات الثقافية</p>
+  </div>
+
+</section>
+
+<section class="section">
+
+  <div class="section-title">
+    <h2>أحدث المقالات</h2>
+    <a href="#">عرض الكل</a>
+  </div>
+
+  <div class="articles">
+
+    <article class="card">
+      <div class="card-image">📚</div>
+      <div class="card-body">
+        <h3>برمجة بين الأمانة والإبداع</h3>
+        <p>
+          قراءة في إشكالات الترجمة الأدبية
+          وتطور الفكر النقدي الحديث.
+        </p>
+        <span class="tag">ترجمة</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-image">📖</div>
+      <div class="card-body">
+        <h3>المنهج البنيوي في النقد</h3>
+        <p>
+          أهم المفاهيم والتطبيقات الحديثة
+          في الدراسات النقدية.
+        </p>
+        <span class="tag">نقد حديث</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-image">✒</div>
+      <div class="card-body">
+        <h3>الأسطورة في الأدب</h3>
+        <p>
+          دراسة تحليلية في حضور الأسطورة
+          في الرواية الحديثة.
+        </p>
+        <span class="tag">تحليل أدبي</span>
+      </div>
+    </article>
+
+  </div>
+
+</section>
+
+<section class="section">
+
+  <div class="section-title">
+    <h2>النقاد البارزون</h2>
+    <a href="#">اكتشف المزيد</a>
+  </div>
+
+  <div class="critics">
+
+    <div class="critic">
+      <div class="avatar">أ</div>
+      <div>
+        <h3>أحمد الناقد</h3>
+        <p>ناقد وباحث أدبي</p>
+      </div>
+    </div>
+
+    <div class="critic">
+      <div class="avatar">م</div>
+      <div>
+        <h3>محمد منصور</h3>
+        <p>ناقد وأكاديمي</p>
+      </div>
+    </div>
+
+    <div class="critic">
+      <div class="avatar">ط</div>
+      <div>
+        <h3>طه حسين</h3>
+        <p>باحث ومفكر</p>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="section">
+
+  <div class="quote">
+    <div class="quote-mark">“</div>
+    <p>
+      النقد ليس هدمًا، بل هو إعادة بناء للوعي من جديد.
+    </p>
+    <small>— اقتباس اليوم</small>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  © 2026 الناقد الرقمي — جميع الحقوق محفوظة
+</footer>
+
+</body>
+</html>
